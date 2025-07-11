@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .left-panel {
+      flex: 1;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .signup-form {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .signup-form h1 {
+      font-size: 28px;
+      color: #3300FF;
+      margin-bottom: 30px;
+    }
+
+    .signup-form label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .signup-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .signup-form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3300FF;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .signup-form .links {
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .signup-form .links a {
+      color: #3300FF;
+      text-decoration: none;
+    }
+
+    .right-panel {
+      flex: 1;
+      background-color: #E6F0FF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-container {
+      text-align: center;
+      max-width: 420px;
+    }
+
+    .logo-container svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .logo-text {
+      font-size: 42px;
+      font-weight: 800;
+      color: #1E40FF;
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        flex: none;
+        width: 100%;
+        height: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <form id="signupForm" class="signup-form">
+      <h1>회원가입</h1>
+
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="홍길동" required />
+
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="email" placeholder="example@handong.edu" required />
+
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" required />
+
+      <label for="confirm-password">비밀번호 확인</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required />
+
+      <button type="submit">회원가입</button>
+
+      <div class="links">
+        이미 계정이 있으신가요? <a href="login.html">로그인</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="right-panel">
+    <div class="logo-container">
+      <svg width="280" height="180" viewBox="0 0 64 64" fill="#1E40FF" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="18" r="10"/>
+        <rect x="20" y="30" width="24" height="20" rx="8"/>
+        <circle cx="12" cy="24" r="7"/>
+        <rect x="6" y="33" width="12" height="16" rx="6"/>
+        <circle cx="52" cy="24" r="7"/>
+        <rect x="46" y="33" width="12" height="16" rx="6"/>
+      </svg>
+      <h2 class="logo-text">CLUB INFO</h2>
+    </div>
+  </div>
+
+  <!-- ✅ Firebase SDK 추가 -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+  <script>
+    // ✅ Firebase 설정
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNBHRNV2lGDnuGtYX6fmY4b5mzKREQBzc",
+      authDomain: "handong-club.firebaseapp.com",
+      projectId: "handong-club",
+      storageBucket: "handong-club.firebasestorage.app",
+      messagingSenderId: "956071079001",
+      appId: "1:956071079001:web:daeb3853277ccb98485548",
+      measurementId: "G-1YKJ2NCZFN"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ✅ 회원가입 로직
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert("✅ 회원가입이 완료되었습니다!");
+          window.location.href = "login.html";
+        })
+        .catch((error) => {
+          alert("❌ 오류: " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>

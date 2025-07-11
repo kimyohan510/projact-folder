@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>가입 신청</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .form-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #3300FF;
+    }
+
+    .form-container {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border: 1px solid #3300FF;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .two-columns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .two-columns > div {
+      flex: 1 1 45%;
+    }
+
+    .submit-btn {
+      margin-top: 28px;
+      width: 100%;
+      background-color: #3300FF;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #1E40FF;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .two-columns {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-header">
+    <h1>가입 신청</h1>
+  </div>
+
+  <form class="form-container" id="club-form">
+    <div class="two-columns">
+      <div>
+        <label for="name-ko">이름</label>
+        <input type="text" id="name-ko" name="name-ko" placeholder="한글 이름" required />
+      </div>
+      <div>
+        <label for="age">나이</label>
+        <input type="text" id="age" name="age" placeholder="예: 21" />
+      </div>
+    </div>
+
+    <div class="two-columns">
+      <div>
+        <label for="student-id">학번</label>
+        <input type="text" id="student-id" name="student-id" placeholder="2023XXXX" required />
+      </div>
+      <div>
+        <label for="major">전공</label>
+        <input type="text" id="major" name="major" placeholder="예: 공간환경시스템공학부" required />
+      </div>
+    </div>
+
+    <div class="two-columns">
+      <div>
+        <label for="phone">연락처</label>
+        <input type="text" id="phone" name="phone" placeholder="010-XXXX-XXXX" required />
+      </div>
+      <div>
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" placeholder="example@handong.edu" />
+      </div>
+    </div>
+
+    <label for="year">학년</label>
+    <input type="text" id="year" name="year" placeholder="1 / 2 / 3 / 4학년" />
+
+    <label for="motivation">지원 동기</label>
+    <textarea id="motivation" name="motivation" placeholder="동아리에 지원하게 된 계기를 자유롭게 작성해주세요."></textarea>
+
+    <button type="submit" class="submit-btn">제출</button>
+  </form>
+
+  <!-- Firebase 연결 스크립트 -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNBHRNV2lGDnuGtYX6fmY4b5mzKREQBzc",
+      authDomain: "handong-club.firebaseapp.com",
+      projectId: "handong-club",
+      storageBucket: "handong-club.appspot.com",
+      messagingSenderId: "956071079001",
+      appId: "1:956071079001:web:daeb3853277ccb98485548",
+      measurementId: "G-1YKJ2NCZFN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('club-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name-ko').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const studentId = document.getElementById('student-id').value.trim();
+      const major = document.getElementById('major').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const year = document.getElementById('year').value.trim();
+      const motivation = document.getElementById('motivation').value.trim();
+
+      if (!name || !studentId || !major || !phone) {
+        alert('필수 항목을 모두 입력해주세요.');
+        return;
+      }
+
+      if (!/^\d{8}$/.test(studentId)) {
+        alert('학번은 8자리 숫자로 입력해주세요.');
+        return;
+      }
+
+      if (!/^010-\d{4}-\d{4}$/.test(phone)) {
+        alert('연락처는 010-XXXX-XXXX 형식으로 입력해주세요.');
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "applicants"), {
+          name,
+          age,
+          studentId,
+          major,
+          phone,
+          email,
+          year,
+          motivation,
+          timestamp: new Date()
+        });
+
+        alert("가입 신청이 완료되었습니다!");
+        window.location.href = "login.html";
+      } catch (e) {
+        alert("오류 발생: " + e.message);
+        console.error("Error adding document: ", e);
+      }
+    });
+  </script>
+</body>
+</html>
