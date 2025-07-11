@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>동아리 주요 행사 달력</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+
+    h2 { margin-bottom: 10px; }
+
+    .calendar {
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .calendar-nav {
+      text-align: center;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .calendar-nav button {
+      padding: 5px 10px;
+      font-size: 16px;
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .calendar-nav button:hover {
+      background-color: #3366CC;
+      color: white;
+    }
+
+    .today-label {
+      position: absolute;
+      right: 0;
+      font-size: 16px;
+      color: #de7672;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      text-align: left;
+      padding: 10px;
+      height: 70px;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+
+    .today-number {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #de7672;
+      color: white;
+      font-weight: bold;
+    }
+
+    .event {
+      padding: 5px;
+      margin-top: 5px;
+      font-size: 0.85em;
+      border-left: 5px solid;
+    }
+    .mic { background: #ffe0b2; border-color: #ff9800; }
+    .liquid { background: #dcedc8; border-color: #8bc34a; }
+    .zizzy { background: #d1c4e9; border-color: #7e57c2; }
+  </style>
+</head>
+<body>
+
+  <h2>동아리별 주요 행사</h2>
+
+  <div class="calendar">
+    <div class="calendar-nav">
+      <button onclick="changeMonth(-1)">&lt;</button>
+      <strong id="monthTitle">3월</strong>
+      <button onclick="changeMonth(1)">&gt;</button>
+      <span class="today-label">Today</span>
+    </div>
+
+    <div id="calendarContent"></div>
+  </div>
+
+  <script>
+    const months = [
+      '3월', '4월', '5월', '6월', '7월', '8월',
+      '9월', '10월', '11월', '12월', '1월', '2월'
+    ];
+
+    let currentMonthIndex = 0;
+
+    const calendarData = {
+      0: `
+        <table>
+          <thead><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr></thead>
+          <tbody>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
+            <tr><td>2</td><td>3</td><td>4</td><td><span class="today-number">5</span></td><td>6</td><td>7</td><td>8</td></tr>
+            <tr><td>9</td><td>10</td><td>11</td><td><div>12</div>
+              <div class="event mic">🕺 MIC: 스트릿 공연</div>
+            </td><td>13</td><td>14</td><td>15</td></tr>
+            <tr><td>16</td><td><div>17</div>
+              <div class="event mic">🕺 MIC: 신입기수 선발</div>
+              <div class="event liquid">🎸 Liquid: 신입기수 선발</div>
+              <div class="event zizzy">💃 Zizzy: 신입기수 선발</div>
+            </td><td>18</td><td>19</td><td>20</td><td><div>21</div>
+              <div class="event mic">🕺 MIC: MT</div>
+            </td><td>22</td></tr>
+            <tr><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td></tr>
+            <tr><td>30</td><td>31</td><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      `
+    };
+
+    for (let i = 1; i < 12; i++) {
+      calendarData[i] = `<p>일정 준비중입니다.</p>`;
+    }
+
+    function renderCalendar() {
+      document.getElementById('monthTitle').textContent = months[currentMonthIndex];
+      document.getElementById('calendarContent').innerHTML = calendarData[currentMonthIndex];
+    }
+
+    function changeMonth(offset) {
+      currentMonthIndex = (currentMonthIndex + offset + 12) % 12;
+      renderCalendar();
+    }
+
+    renderCalendar();
+  </script>
+</body>
+</html>

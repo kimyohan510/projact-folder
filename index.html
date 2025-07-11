@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한동대학교 동아리 플랫폼</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f8fafd;
+      color: #111;
+      line-height: 1.6;
+      font-size: 87.5%;}
+
+    header {
+      background: url(bg.jpg) center/cover no-repeat;
+      padding: 80px 20px 100px;
+      color: #fff;
+      position: relative;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;}
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a.login-button {
+      margin-left: auto;
+      background-color: #2f80ed;
+      color: #fff;
+      padding: 10px 24px;
+      font-size: 14px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    nav a.login-button:hover {
+      background-color: #1c60c4;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      margin: 30px auto 0;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-content p {
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .know-more-box {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      display: inline-block;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+    .know-more-box:hover { filter: brightness(90%); }
+
+    .popular-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .popular-section h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .popular-section p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .filter-menu {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-menu button {
+      padding: 8px 16px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .filter-menu button.active {
+      background: #3399ff;
+      color: #fff;
+      font-weight: bold;
+      transform: scale(1.05);
+    }
+
+    .card-scroll-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 16px;
+      padding: 16px;
+      scroll-behavior: smooth;
+    }
+
+    .card-scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .card-scroll-container::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
+
+    .card-scroll-container::-webkit-scrollbar-track {
+      background-color: #f0f0f0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      width: 240px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      transition: filter 0.3s ease;
+      filter: brightness(80%);
+      flex: 0 0 auto;
+    }
+
+    .card:hover {
+      filter: brightness(100%);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+      text-align: left;
+    }
+
+    .card-content h4 {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .calendar-section {
+      margin-top: 80px;
+      padding: 40px 20px;
+      background-color: #f1f5f9;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .calendar-section h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .calendar-section p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#popular">분과별 보기</a>
+      <a href="signup.html">신청 안내</a>
+      <a href="#">문의하기</a>
+      <a class="login-button" href="login.html">로그인</a>
+    </nav>
+    <div class="hero-content">
+      <p style="font-size: 13px; letter-spacing: 1px;">한동 동아리 생활의 모든 것</p>
+      <h1>한눈에 보는 동아리<br /> 새로운 연결의 시작</h1>
+      <p>활동, 배움, 교제까지! 나에게 맞는 동아리를 지금 찾아보세요.</p>
+      <div class="know-more-box">
+        <h4>더 알아보기 →</h4>
+        <small>활동 소개, 사진, 모집 정보까지 한눈에!</small>
+      </div>
+    </div>
+  </header>
+
+  <section class="popular-section" id="popular">
+    <h2>분과별 보기</h2>
+    <p>각 분과별로 동아리를 확인해보세요!</p>
+
+<div class="filter-menu">
+  <button class="filter-button active" data-filter="all">전체</button>
+  <button class="filter-button" data-filter="공연분과">공연</button>
+  <button class="filter-button" data-filter="전시분과">전시</button>
+  <button class="filter-button" data-filter="종교분과">종교</button>
+  <button class="filter-button" data-filter="체육분과">체육</button>
+  <button class="filter-button" data-filter="학술분과">학술</button>
+  <button class="filter-button" data-filter="봉사분과">봉사</button>
+  <button class="filter-button" data-filter="전산분과">전산</button>
+</div>
+<style>
+  .card-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    scroll-behavior: smooth;
+  }
+
+  .card-scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .card-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+
+  .club-card {
+    position: relative;
+    width: 240px;
+    height: 340px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .club-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .club-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+    color: white;
+    padding: 20px;
+    transition: color 0.3s ease;
+  }
+
+  .card-overlay h4 {
+    margin: 0;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+
+  .card-overlay:hover h4 {
+    color: #3399ff;
+  }
+
+  .card-overlay p {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .card-overlay:hover p {
+    color: #3399ff;
+  }
+</style>
+
+<div class="card-scroll-container" id="scroll-cards">
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/갓스펠로우.jpg"><div class="card-overlay"><h4>갓스펠로우</h4><p>힙합 찬양으로 복음을 전해요</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/꾼들.jpg"><div class="card-overlay"><h4>꾼들</h4><p>연극을 통한 감동 전달</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/레버리.jpg"><div class="card-overlay"><h4>레버리</h4><p>클래식 기타 연주</p></div></a>
+<a class="club-card" data-category="공연분과" href="about.html">
+  <img src="분과_사진/공연분과/리퀴드.jpg">
+  <div class="card-overlay">
+    <h4>리퀴드</h4>
+    <p>보컬과 기타 선교</p>
+  </div>
+</a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/미르.jpg"><div class="card-overlay"><h4>미르</h4><p>락 밴드 찬양</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/소울.jpg"><div class="card-overlay"><h4>소울</h4><p>수어 찬양 사역</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/어메이징스토리.jpg"><div class="card-overlay"><h4>어메이징 스토리</h4><p>연극과 문화선교</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/즉흥적새벽두시.jpg"><div class="card-overlay"><h4>즉흥적 새벽 두시</h4><p>재즈 & 어쿠스틱</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/피치파이프.jpg"><div class="card-overlay"><h4>피치파이프</h4><p>아카펠라 찬양</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/하향.jpg"><div class="card-overlay"><h4>하향</h4><p>한국무용</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/한동오케스트라.jpg"><div class="card-overlay"><h4>한동 오케스트라</h4><p>클래식 음악 연주</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/응원단.jpg"><div class="card-overlay"><h4>한동대학교 응원단</h4><p>치어리딩 퍼포먼스</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/한풍.jpg"><div class="card-overlay"><h4>한풍</h4><p>사물놀이 전통 공연</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/Ammission.jpg"><div class="card-overlay"><h4>Ammission</h4><p>힙합 찬양으로 전도</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/GO.jpg"><div class="card-overlay"><h4>G.O.</h4><p>워십 댄스 사역</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/MIC.jpg"><div class="card-overlay"><h4>MIC</h4><p>댄스 선교 사역</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/NEO.jpg"><div class="card-overlay"><h4>NEO</h4><p>작사·작곡 동아리</p></div></a>
+  <a class="club-card" data-category="공연분과" href="#"><img src="분과_사진/공연분과/ZIZZY.jpg"><div class="card-overlay"><h4>ZIZZY</h4><p>K-pop 댄스</p></div></a>
+
+  <a class="club-card" data-category="전시분과" href="#"><img src="분과_사진/전시분과/CANVAS.jpg"><div class="card-overlay"><h4>CANVAS</h4><p>회화 미술</p></div></a>
+  <a class="club-card" data-category="전시분과" href="#"><img src="분과_사진/전시분과/HAC.jpg"><div class="card-overlay"><h4>HAC</h4><p>애니·피규어 전시</p></div></a>
+  <a class="club-card" data-category="전시분과" href="#"><img src="분과_사진/전시분과/VAM.jpg"><div class="card-overlay"><h4>VAM</h4><p>사진 동아리</p></div></a>
+
+  <a class="club-card" data-category="종교분과" href="#"><img src="분과_사진/종교분과/B2B.jpg"><div class="card-overlay"><h4>B2B</h4><p>성경 암송</p></div></a>
+  <a class="club-card" data-category="종교분과" href="#"><img src="분과_사진/종교분과/오르.jpg"><div class="card-overlay"><h4>오르</h4><p>중보기도</p></div></a>
+  <a class="club-card" data-category="종교분과" href="#"><img src="분과_사진/종교분과/CCC.jpg"><div class="card-overlay"><h4>CCC</h4><p>선교 단체</p></div></a>
+  <a class="club-card" data-category="종교분과" href="#"><img src="분과_사진/종교분과/SFC.jpg"><div class="card-overlay"><h4>SFC</h4><p>개혁주의 신앙운동</p></div></a>
+
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/Hoops.jpg"><div class="card-overlay"><h4>Hoops</h4><p>농구 동아리</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/Holy Rams.jpg"><div class="card-overlay"><h4>Holy Rams</h4><p>미식축구</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/HMILAN.jpg"><div class="card-overlay"><h4>H.MILAN</h4><p>축구 동아리</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/덜지니어스.jpg"><div class="card-overlay"><h4>덜지니어스</h4><p>보드게임</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/천풍해세.jpg"><div class="card-overlay"><h4>천풍해세</h4><p>태권도</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/한검.jpg"><div class="card-overlay"><h4>한검</h4><p>검도 동아리</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/한마지로.jpg"><div class="card-overlay"><h4>한마지로</h4><p>유도</p></div></a>
+  <a class="club-card" data-category="체육분과" href="#"><img src="분과_사진/체육분과/한방스윙스.jpg"><div class="card-overlay"><h4>한방 스윙스</h4><p>야구</p></div></a>
+
+  <a class="club-card" data-category="학술분과" href="#"><img src="분과_사진/학술분과/펜통.jpg"><div class="card-overlay"><h4>펜통</h4><p>문예 창작</p></div></a>
+  <a class="club-card" data-category="학술분과" href="#"><img src="분과_사진/학술분과/DUDUS.jpg"><div class="card-overlay"><h4>DUDUS</h4><p>창조과학 연구</p></div></a>
+
+  <a class="club-card" data-category="봉사분과" href="#"><img src="분과_사진/봉사분과/팔레트.jpg"><div class="card-overlay"><h4>팔레트</h4><p>벽화 봉사</p></div></a>
+  <a class="club-card" data-category="봉사분과" href="#"><img src="분과_사진/봉사분과/피스메이커.jpg"><div class="card-overlay"><h4>피스메이커</h4><p>아동 멘토링</p></div></a>
+  <a class="club-card" data-category="봉사분과" href="#"><img src="분과_사진/봉사분과/LAMP.jpg"><div class="card-overlay"><h4>LAMP</h4><p>캠퍼스 개선</p></div></a>
+  <a class="club-card" data-category="봉사분과" href="#"><img src="분과_사진/봉사분과/청소년자유학교.jpg"><div class="card-overlay"><h4>청소년 자유학교</h4><p>대안 교육</p></div></a>
+
+  <a class="club-card" data-category="전산분과" href="#"><img src="분과_사진/전산분과/슬기짜기.jpg"><div class="card-overlay"><h4>슬기짜기</h4><p>AI/앱/코딩</p></div></a>
+  <a class="club-card" data-category="전산분과" href="#"><img src="분과_사진/전산분과/CRA.jpg"><div class="card-overlay"><h4>CRA</h4><p>컴퓨터 연구</p></div></a>
+  <a class="club-card" data-category="전산분과" href="#"><img src="분과_사진/전산분과/GHOST.jpg"><div class="card-overlay"><h4>GHOST</h4><p>정보보안</p></div></a>
+</div>
+
+<script>
+  const scrollContainer = document.querySelector('.card-scroll-container');
+  let autoScrollInterval = null;
+
+  scrollContainer.addEventListener('mousemove', (e) => {
+    const containerRect = scrollContainer.getBoundingClientRect();
+    const mouseX = e.clientX - containerRect.left;
+    const zoneWidth = 60;
+
+    clearInterval(autoScrollInterval);
+
+    if (mouseX < zoneWidth) {
+      autoScrollInterval = setInterval(() => {
+        scrollContainer.scrollLeft -= 3;
+      }, 10);
+    } else if (mouseX > containerRect.width - zoneWidth) {
+      autoScrollInterval = setInterval(() => {
+        scrollContainer.scrollLeft += 3;
+      }, 10);
+    }
+  });
+
+  scrollContainer.addEventListener('mouseleave', () => {
+    clearInterval(autoScrollInterval);
+  });
+
+const filterButtons = document.querySelectorAll('.filter-button');
+const clubCards = document.querySelectorAll('.club-card');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    const filter = button.getAttribute('data-filter');
+
+    clubCards.forEach(card => {
+      if (filter === 'all' || card.getAttribute('data-category') === filter) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.club-card').forEach(card => {
+      card.classList.add('show');
+    });
+
+    const knowMoreBox = document.querySelector('.know-more-box');
+    if (knowMoreBox) {
+      knowMoreBox.addEventListener('click', () => {
+        const calendarSection = document.querySelector('#calendar');
+        if (calendarSection) {
+          calendarSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  });
+</script>
+
+<section id="calendar" style="padding: 60px 20px; background-color: #f3f6fb; text-align: center;">
+  <h2 style="font-size: 26px; margin-bottom: 20px;">동아리 활동 캘린더</h2>
+  <p style="margin-bottom: 20px; color: #555;">한동대학교 동아리의 다양한 일정을 확인해보세요!</p>
+  <h3>미리보기</h3>
+  <iframe src="calendar2.html" 
+          width="100%" 
+          height="400" 
+          style="border: 1px solid #3366CC; border-radius: 10px;">
+  </iframe>
+
+  <div style="text-align: right; margin-top: 10px;">
+    <a href="calendar2.html"
+       style="padding: 10px 24px; background-color: #2f80ed; color: white; text-decoration: none; border-radius: 30px; font-size: 14px;">
+      자세히 보기
+    </a>
+  </div>
+</section>
+
+</body>
+</html>
